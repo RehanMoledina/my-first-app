@@ -11,10 +11,36 @@ export default function Home() {
       </p>
       <a
         href="#"
-        className="px-8 py-3 bg-white text-purple-600 font-semibold rounded-lg shadow-lg hover:bg-purple-50 transition-colors text-lg"
+        className="px-8 py-3 bg-white text-purple-600 font-semibold rounded-lg shadow-lg hover:bg-purple-50 transition-colors text-lg mb-12"
       >
         Get Started
       </a>
+      {/* Feature cards section */}
+      <section className="w-full flex flex-col items-center justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl w-full px-4">
+          <div className="bg-white bg-opacity-90 rounded-xl shadow-lg p-6 flex flex-col items-center">
+            <span className="text-3xl mb-3">📈</span>
+            <h2 className="text-xl font-semibold text-purple-700 mb-2">Track Your Progress</h2>
+            <p className="text-gray-700 text-center">
+              Visualize your habit streaks and accomplishments, so you stay motivated on your journey.
+            </p>
+          </div>
+          <div className="bg-white bg-opacity-90 rounded-xl shadow-lg p-6 flex flex-col items-center">
+            <span className="text-3xl mb-3">⏰</span>
+            <h2 className="text-xl font-semibold text-purple-700 mb-2">Build Consistency</h2>
+            <p className="text-gray-700 text-center">
+              Set daily and weekly goals, and enjoy gentle reminders to help consistency become second nature.
+            </p>
+          </div>
+          <div className="bg-white bg-opacity-90 rounded-xl shadow-lg p-6 flex flex-col items-center">
+            <span className="text-3xl mb-3">🎯</span>
+            <h2 className="text-xl font-semibold text-purple-700 mb-2">Achieve Your Goals</h2>
+            <p className="text-gray-700 text-center">
+              Turn small changes into big results by celebrating milestones as you reach new heights.
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
