@@ -5,6 +5,7 @@ import { useState } from 'react';
 export default function TaskCounter() {
   const [count, setCount] = useState(0);
   const [goal, setGoal] = useState(10);
+  const [goalInput, setGoalInput] = useState('10');
 
   const handleIncrement = () => {
     setCount((prevCount) => prevCount + 1);
@@ -15,8 +16,26 @@ export default function TaskCounter() {
   };
 
   const handleGoalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value) || 0;
-    setGoal(Math.max(1, value));
+    const value = e.target.value;
+    setGoalInput(value);
+    
+    // Only update goal if it's a valid positive number
+    const numValue = parseInt(value);
+    if (!isNaN(numValue) && numValue > 0) {
+      setGoal(numValue);
+    }
+  };
+
+  const handleGoalBlur = () => {
+    // Validate on blur and ensure minimum of 1
+    const numValue = parseInt(goalInput);
+    if (isNaN(numValue) || numValue < 1) {
+      setGoalInput(goal.toString());
+      setGoal(Math.max(1, goal));
+    } else {
+      setGoalInput(numValue.toString());
+      setGoal(numValue);
+    }
   };
 
   const isGoalReached = count >= goal && goal > 0;
@@ -30,8 +49,9 @@ export default function TaskCounter() {
         </label>
         <input
           type="number"
-          value={goal}
+          value={goalInput}
           onChange={handleGoalChange}
+          onBlur={handleGoalBlur}
           min="1"
           className="px-4 py-2 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:outline-none text-center text-lg font-semibold text-purple-700"
         />
