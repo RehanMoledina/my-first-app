@@ -1,11 +1,36 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function TaskCounter() {
   const [count, setCount] = useState(0);
   const [goal, setGoal] = useState(10);
   const [goalInput, setGoalInput] = useState('10');
+
+  // Load saved data when component first mounts
+  useEffect(() => {
+    const savedCount = localStorage.getItem('taskCount');
+    const savedGoal = localStorage.getItem('taskGoal');
+    
+    if (savedCount) {
+      setCount(parseInt(savedCount));
+    }
+    if (savedGoal) {
+      const goalValue = parseInt(savedGoal);
+      setGoal(goalValue);
+      setGoalInput(goalValue.toString());
+    }
+  }, []); // Empty array means this runs once when component loads
+
+  // Save count to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('taskCount', count.toString());
+  }, [count]); // Runs whenever count changes
+
+  // Save goal to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('taskGoal', goal.toString());
+  }, [goal]); // Runs whenever goal changes
 
   const handleIncrement = () => {
     setCount((prevCount) => prevCount + 1);
