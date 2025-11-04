@@ -6,6 +6,12 @@ export default function Home() {
       <h1 className="text-5xl md:text-6xl font-bold text-white shadow-lg mb-4">
         Habit Tracker
       </h1>
+      <button
+        onClick={() => alert('Hello! Welcome to Habit Tracker!')}
+        className="px-6 py-2 bg-white text-purple-600 font-semibold rounded-lg shadow-md hover:bg-purple-50 transition-colors mb-4"
+      >
+        Test Click
+      </button>
       <p className="text-lg md:text-xl text-white mb-8 max-w-xl text-center">
         Build better habits, one day at a time. Track your progress and achieve your goals with our simple, beautiful habit tracking app.
       </p>
