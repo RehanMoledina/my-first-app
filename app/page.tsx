@@ -1,50 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
-function getTimeRemaining(targetDate: Date) {
-  const total = targetDate.getTime() - new Date().getTime();
-  const isPast = total <= 0;
-  const seconds = isPast ? 0 : Math.floor((total / 1000) % 60);
-  const minutes = isPast ? 0 : Math.floor((total / 1000 / 60) % 60);
-  const hours = isPast ? 0 : Math.floor((total / (1000 * 60 * 60)) % 24);
-  const days = isPast ? 0 : Math.floor(total / (1000 * 60 * 60 * 24));
-  return { total, days, hours, minutes, seconds, isPast };
-}
-
-function CountdownTimer() {
-  const targetDate = new Date('2025-11-03T14:00:00');
-  const [timeLeft, setTimeLeft] = useState(getTimeRemaining(targetDate));
-
-  useEffect(() => {
-    if (timeLeft.isPast) return;
-    const timer = setInterval(() => {
-      setTimeLeft(getTimeRemaining(targetDate));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [timeLeft.isPast, targetDate]);
-
-  return (
-    <div className="mt-2 flex flex-col items-center">
-      <div className="text-white text-lg font-medium bg-purple-700 bg-opacity-70 px-4 py-2 rounded-lg shadow-md inline-flex gap-2">
-        <span>Countdown to 2PM, 3rd November 2025:</span>
-        {timeLeft.isPast ? (
-          <span className="ml-2 font-bold text-rose-200">Event Started!</span>
-        ) : (
-          <span className="ml-2 font-bold text-white">
-            {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
-          </span>
-        )}
-      </div>
-    </div>
-  );
-}
-
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 font-sans">
-      {/* Move the CountdownTimer to the very top */}
-      <CountdownTimer />
       <h1 className="text-5xl md:text-6xl font-bold text-white shadow-lg mb-4">
         Habit Tracker
       </h1>
